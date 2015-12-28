@@ -1,6 +1,7 @@
 [
 {
 	"name":"Hazara",
+	"photo": "hazara.jpg",
 	"cuisine": ["Asian", "Indian"],
 	"website": "hazara.mn",
 	"address": "Peace Ave 16 | Behind Wrestling Palace ,13th Micro District Ulaanbaatar,Mongolia, Ulaanbaatar 13280, Mongolia",
@@ -8,12 +9,14 @@
 },
 {
 	"name": "Namaste",
+	"photo": "namaste.jpg",
 	"cuisine": ["Indian"],
 	"address": "Sansar district inside Flower Hotel | Chingeltei district, Khoroo-5 Opposite side of Geser Sum, Margad Center Second floor, Ulaanbaatar, Mongolia",
 	"hours" : {}
 },
 {
 	"name": "Modern Nomads",
+	"photo": "modern-nomads.jpg",
 	"cuisine": ["Asian", "Mongolian"],
 	"website": "modernnomads.mn",
 	"address": "In Front of Metro Mall and Khuukhdiin Urlan Buteekh Tuv, Baga Toiruu, Sukhbaatar District | Baga Toiruu, Sukhbaatar District, Ulaanbaatar, Mongolia",
@@ -21,6 +24,7 @@
 },
 {
 	"name": "Khara Khorum Restaurant",
+	"photo": "",
 	"cuisine": ["Asian", "Mongolian"],
 	"website": "kempinski.com",
 	"address": "East Cross Road | at Kempinski Hotel Khan Palace, Peace Avenue, Bayan-Zurkh District, Ulaanbaatar, Mongolia",
@@ -28,6 +32,7 @@
 },
 {
 	"name": "Silk Road Bar & Grill",
+	"photo": "",
 	"cuisine": ["Pizza", "International", "Pasta"],
 	"website": "facebook.com/SILK-ROAD-Bazaar-1463027130596689/",
 	"address": "Jamyan Gun Street 5-1 | central Ulaanbaatar, Ulaanbaatar, Mongolia",
@@ -35,42 +40,50 @@
 },
 {
 	"name": "Ukrainskaya Kuhnya",
+	"photo": "",
 	"cuisine": ["Russian", "Eastern", "European", "Ukrainian"],
 	"address": "Tokyo Street - opposite of Chinggis Khaan hotel | Bayanzurkh District, Ulaanbaatar, Mongolia"
 },
 {
 	"name": "Seoul Restaurant",
+	"photo": "",
 	"cuisine": ["Chinese", "Japanese", "Bar", "European", "Asian", "Korean", "Pub"],
 	"address": "Ulaanbaatar, Mongolia"
 },
 {
 	"name": "The Loving Hut",
+	"photo": "",
 	"cuisine": ["Vegan"],
 	"address": "Juulchid Street, Ulaanbaatar, Mongolia"
 },
 {
 	"name": "Fuji",
+	"photo": "",
 	"cuisine": ["Japanese", "Asian"],
 	"address": "Zaluuchuud Avenue 18 | 1st Khorhoo, Bayanzurkh District, Ulaanbaatar, Mongolia"
 },
 {
 	"name": "Sakura",
+	"photo": "",
 	"cuisine": ["Japanese", "Asian"],
 	"website": "kempinski.com",
 	"address": "East Cross Road, Peace Avenue | Kempinski Hotel Khan Palace, Ulaanbaatar 11000, Mongolia"
 },
 {
 	"name": "Cafe de Amor",
+	"photo": "",
 	"cuisine": ["Cafe", "Fast Food", "Vegetarian", "Vegan"],
 	"address": "left side of the embassy of Cuba, Ulaanbaatar 245379, Mongolia"
 },
 {
 	"name": "Chingis",
+	"photo": "",
 	"cuisine": ["German"],
 	"address": "Sukhbaatar Street 10, Ulaanbaatar, Mongolia"
 },
 {
 	"name": "KFC",
+	"photo": "",
 	"cuisine": ["American"],
 	"address": "Chinggis Avenue, Ulaanbaatar, Mongolia"
 }
