@@ -77,17 +77,42 @@ Copyright (c) 2015 ubs121
             <paper-menu class="menu-content sublist" >
                 <a data-route="home" href="{{baseUrl}}">
                   <iron-icon icon="home"></iron-icon>
-                  <span>item1</span>
+                  <span>Asian</span>
                 </a>
 
                 <a data-route="rests" href="{{baseUrl}}rests">
                   <iron-icon icon="info"></iron-icon>
-                  <span>item2</span>
+                  <span>Mongolian</span>
+                </a>
+
+                <a data-route="rests" href="{{baseUrl}}rests">
+                  <iron-icon icon="info"></iron-icon>
+                  <span>Japanese</span>
                 </a>
 
                 <a data-route="contact" href="{{baseUrl}}contact">
                   <iron-icon icon="mail"></iron-icon>
-                  <span>item3</span>
+                  <span>Korean</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>Chinese</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>Pizza</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>Vegan</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>Fast Food</span>
                 </a>
             </paper-menu>
           </paper-submenu>
@@ -98,39 +123,56 @@ Copyright (c) 2015 ubs121
             <paper-menu class="menu-content sublist">
                 <a data-route="home" href="{{baseUrl}}">
                   <iron-icon icon="home"></iron-icon>
-                  <span>item1</span>
-                </a>
-
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>item2</span>
+                  <span>East</span>
                 </a>
 
                 <a data-route="contact" href="{{baseUrl}}contact">
                   <iron-icon icon="mail"></iron-icon>
-                  <span>item3</span>
+                  <span>West</span>
+                </a>
+
+                <a data-route="rests" href="{{baseUrl}}rests">
+                  <iron-icon icon="info"></iron-icon>
+                  <span>Center</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>South</span>
+                </a>
+
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>North</span>
                 </a>
             </paper-menu>
           </paper-submenu>
 
           <paper-submenu label="paper-submenu" opened>
 
-            <paper-item class="menu-trigger">By hours</paper-item>
+            <paper-item class="menu-trigger">By opening hours</paper-item>
             <paper-menu class="menu-content sublist">
-                <a data-route="home" href="{{baseUrl}}">
-                  <iron-icon icon="home"></iron-icon>
-                  <span>item1</span>
-                </a>
-
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>item2</span>
+                <a data-route="contact" href="{{baseUrl}}contact">
+                  <iron-icon icon="mail"></iron-icon>
+                  <span>Early</span>
                 </a>
 
                 <a data-route="contact" href="{{baseUrl}}contact">
                   <iron-icon icon="mail"></iron-icon>
-                  <span>item3</span>
+                  <span>Night</span>
                 </a>
+
+                <a data-route="home" href="{{baseUrl}}">
+                  <iron-icon icon="home"></iron-icon>
+                  <span>Weekday</span>
+                </a>
+
+                <a data-route="rests" href="{{baseUrl}}rests">
+                  <iron-icon icon="info"></iron-icon>
+                  <span>Weekend</span>
+                </a>
+
+                
             </paper-menu>
           </paper-submenu>
 
@@ -158,6 +200,7 @@ Copyright (c) 2015 ubs121
 
           <!-- sorting -->
           <div class="bottom bottom-container center horizontal layout">
+            Sort by: &nbsp;
             <paper-tabs selected="0">
               <paper-tab>Ranking</paper-tab>
               <paper-tab>Name</paper-tab>
