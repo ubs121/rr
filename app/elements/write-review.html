@@ -1,11 +1,31 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 
 <dom-module id="write-review">
 
 <template>
-	<h2>{{data.title}}</h2>
+  <paper-input label="Title of your review" value="{{data.title}}"></paper-input>
 
-  <input is="iron-input" bind-value="{{data.review}}"> 
+  <paper-input label="Tell about your experience: your meal, atmosphere, service?" value="{{data.review}}"></paper-input>
+
+
+  Click to select a rating
+    <p>Service: 
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.serviceRating}}"></paper-slider>
+    </p>
+    
+    <p>Food:
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.foodRating}}"></paper-slider>
+    </p>
+    <p>Value:
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.valueRating}}"></paper-slider>
+    </p>
+
+  How expensive is this restaurant?
+    <paper-button>Cheap eats</paper-button>
+    <paper-button>Mid range</paper-button>
+    <paper-button>Fine dinning</paper-button>
 </template>
 
 <script>
