@@ -1,0 +1,23 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="write-review">
+
+<template>
+	<h2>{{data.title}}</h2>
+
+  <input is="iron-input" bind-value="{{data.review}}"> 
+</template>
+
+<script>
+    Polymer({
+      is: 'write-review',
+
+      properties: {
+      	data: {
+      		type: Object,
+      		value: function() { return {}; }; 
+      	}
+      },
+
+  	});
+</dom-module>

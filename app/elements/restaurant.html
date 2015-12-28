@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="rest-info">
+
+<template>
+	<h2>[[data.name]]</h2>
+	<img src="{{baseUrl}}/data/[[data.photo]]">
+
+	Cuisine: <p>[[data.cuisine]]</p>
+	Wensite: <p>[[data.website]]</p>
+	<p>Address: [[data.address]]</p>
+
+	Opening hours:
+	<p>[[data.hours]]</p>
+</template>
+
+<script>
+    Polymer({
+      is: 'rest-info',
+
+      properties: {
+      	data: {
+      		type: Object,
+      		value: function() { return {}; }; 
+      	}
+      },
+
+  	});
+</dom-module>
