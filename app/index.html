@@ -75,7 +75,7 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By cuisine</paper-item>
             <paper-menu class="menu-content sublist" >
-                <a data-route="home" href="{{baseUrl}}">
+                <a data-route="home" href="{{baseUrl}}rests">
                   <iron-icon icon="home"></iron-icon>
                   <span>Asian</span>
                 </a>
@@ -121,7 +121,7 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By location</paper-item>
             <paper-menu class="menu-content sublist">
-                <a data-route="home" href="{{baseUrl}}">
+                <a data-route="home" href="{{baseUrl}}rests">
                   <iron-icon icon="home"></iron-icon>
                   <span>East</span>
                 </a>
@@ -190,8 +190,8 @@ Copyright (c) 2015 ubs121
           <span class="flex"></span>
 
           <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
+          <paper-icon-button icon="refresh" on-click="filter"></paper-icon-button>
+          <paper-icon-button icon="search" on-click="filter"></paper-icon-button>
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
@@ -200,11 +200,12 @@ Copyright (c) 2015 ubs121
 
           <!-- sorting -->
           <div class="bottom bottom-container center horizontal layout">
-            Sort by: &nbsp;
+            <p class="small">Sort by</p>
             <paper-tabs selected="0">
               <paper-tab>Ranking</paper-tab>
               <paper-tab>Name</paper-tab>
               <paper-tab>Price</paper-tab>
+              <paper-tab>Location</paper-tab>
             </paper-tabs>
           </div>
 
@@ -214,33 +215,48 @@ Copyright (c) 2015 ubs121
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-            <section data-route="home">
-              <paper-material elevation="1">
-                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
-              </paper-material>
-              <paper-material elevation="1">
-                <p class="paper-font-body2">This is another card.</p>
-              </paper-material>
-
-
-            </section>
-
             <section data-route="rests">
-              <paper-material elevation="1">
-                <p>Restaurant list</p>
-                <a href$="{{baseUrl}}rests/Hazara">Hazara</a><br>
-                <a href$="{{baseUrl}}rests/Namaste">Namaste</a><br>
-                <a href$="{{baseUrl}}rests/Fuji">Fuji</a><br>
-                <a href$="{{baseUrl}}rests/Chingis">Chingis</a>
-                <a href$="{{baseUrl}}rests/KFC">KFC</a>
-              </paper-material>
+              <p>Restaurant list: asian</p>
+
+              <template is="dom-repeat" items="{{data.restaurant}}">
+                <paper-card>
+                  <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a><br>
+                </paper-card>
+              </template>
             </section>
 
-            <section data-route="rest-info">
+            <section data-route="rest">
               <paper-material elevation="1">
                 <h2 class="page-title">Restaurant: {{params.name}}</h2>
                 <div>This is {{params.name}}'s section</div>
+                
               </paper-material>
+
+
+              <paper-material elevation="1">
+                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <a href$="{{baseUrl}}review/{{params.name}}">write review</a>
+              </paper-material>
+
+
+            </section>
+
+            <section data-route="review">
+              <paper-material elevation="1">
+                <h2>{{params.name}}</h2>
+                <p>Thank you for reviewing!</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <write-review data="{{current}}"></write-review>
+              </paper-material>
+
+              
+              <paper-button raised on-click="submitReview">Submit your review</paper-button>
+
             </section>
 
             <section data-route="contact">
@@ -280,6 +296,7 @@ Copyright (c) 2015 ubs121
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
+  <script src="scripts/helper.js"></script>
   <!-- endbuild-->
 </body>
 
