@@ -75,45 +75,14 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By cuisine</paper-item>
             <paper-menu class="menu-content sublist" >
-                <a data-route="home" href="{{baseUrl}}rests">
+
+              <template is="dom-repeat" items="[[filterCuisine]]">
+                <a data-route="rests" href="{{baseUrl}}rests">
                   <iron-icon icon="home"></iron-icon>
-                  <span>Asian</span>
+                  <span>{{item}}</span>
                 </a>
+              </template>
 
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>Mongolian</span>
-                </a>
-
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>Japanese</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Korean</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Chinese</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Pizza</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Vegan</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Fast Food</span>
-                </a>
             </paper-menu>
           </paper-submenu>
 
@@ -121,7 +90,7 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By location</paper-item>
             <paper-menu class="menu-content sublist">
-                <a data-route="home" href="{{baseUrl}}rests">
+                <a data-route="rests" href="{{baseUrl}}rests">
                   <iron-icon icon="home"></iron-icon>
                   <span>East</span>
                 </a>
@@ -221,6 +190,7 @@ Copyright (c) 2015 ubs121
               <template is="dom-repeat" items="{{data.restaurant}}">
                 <paper-card>
                   <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a><br>
+                  <img src="{{baseUrl}}data/{{item.photo}}">
                 </paper-card>
               </template>
             </section>

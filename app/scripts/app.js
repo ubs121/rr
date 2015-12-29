@@ -10,6 +10,10 @@ Copyright (c) 2015 ubs121
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
+  app.filterCuisine = ['asian', 'mongolian', 'japanese', 'korean', 'chinese', 'pizza', 'vegan', 'fast food'];
+  app.filterLocation = ['east', 'west', 'center', 'south', 'north'];
+  app.filterHours = ['early'];
+
   // Sets app default base URL
   app.baseUrl = '/';
   if (window.location.port === '') {  // if production
@@ -72,6 +76,8 @@ Copyright (c) 2015 ubs121
   app.closeDrawer = function() {
     app.$.paperDrawerPanel.closeDrawer();
   };
+
+
 
   app.data = {};
   app.review = {};
