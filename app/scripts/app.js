@@ -73,4 +73,47 @@ Copyright (c) 2015 ubs121
     app.$.paperDrawerPanel.closeDrawer();
   };
 
+  app.data = {};
+  app.review = {};
+
+  app.loadData = function(e) {
+    var dataNames = ['restaurant',  'review'];
+    
+    dataNames.forEach(function(name) {
+      fetch('data/' + name + '.json')
+        .then(function(response) { 
+          response.json().then(function(json) {
+            console.log(json);
+            app.data[name] = json;
+          });
+        })
+        .catch(function(err) {
+
+        });
+    });
+  };
+
+  app.sort = function(e) {
+    // TODO: sort by
+  };
+
+  app.filter = function(e) {
+    // TODO: filter by
+    console.log('filter!');
+  };
+
+  
+  app.submitReview = function(e) {
+    var today = new Date();
+    
+    // auto fields    
+    app.review.restaurant = app.params.name;
+    app.review.date = formatDate(today);
+
+    console.log('save!', app.review);
+  };
+
+
+  app.loadData();
+
 })(document);
