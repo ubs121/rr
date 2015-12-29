@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+
+<dom-module id="write-review">
+
+<template>
+  Overall rating of this restaurant: 
+  <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.totalRating}}"></paper-slider>
+
+  <paper-input label="Your name" value="{{data.reviewer}}"></paper-input>
+
+  <paper-textarea label="Tell about your experience: your meal, atmosphere, service?" value="{{data.review}}" rows="3" max-rows="3"></paper-textarea>
+
+
+    <p>Service: 
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.serviceRating}}"></paper-slider>
+    </p>
+    
+    <p>Food:
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.foodRating}}"></paper-slider>
+    </p>
+    <p>Value:
+    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.valueRating}}"></paper-slider>
+    </p>
+
+  How expensive is this restaurant?
+  <paper-radio-group selected="{{data.priceReview}}">
+    <paper-radio-button name="cheap">Cheap eats</paper-radio-button>
+    <paper-radio-button name="mid">Mid range</paper-radio-button>
+    <paper-radio-button name="fine">Fine dining</paper-radio-button>
+  </paper-radio-group>
+
+</template>
+
+<script>
+    Polymer({
+      is: 'write-review',
+
+      properties: {
+      	data: {
+      		type: Object,
+      		value: function() { return {}; }
+      	}
+      }
+
+  	});
+</script>
+</dom-module>
