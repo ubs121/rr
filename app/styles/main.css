@@ -12,3 +12,9 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+
+.small {
+	font-size: small;
+	color: silver;
+}
