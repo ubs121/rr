@@ -5,7 +5,7 @@
 	"cuisine": ["Asian", "Indian"],
 	"website": "hazara.mn",
 	"address": "Peace Ave 16 | Behind Wrestling Palace ,13th Micro District Ulaanbaatar,Mongolia, Ulaanbaatar 13280, Mongolia",
-	"hours": {"mon": "09:00-18:00", "tue": "10:00-19:00"}
+	"hours": {"Mon": "09:00", "Tue-Fri": "10:00"}
 },
 {
 	"name": "Namaste",
@@ -28,7 +28,7 @@
 	"cuisine": ["Asian", "Mongolian"],
 	"website": "kempinski.com",
 	"address": "East Cross Road | at Kempinski Hotel Khan Palace, Peace Avenue, Bayan-Zurkh District, Ulaanbaatar, Mongolia",
-	"hours": {"": "11:00-23:00"}
+	"hours": {"Mon-Fri": "11:00-23:00"}
 },
 {
 	"name": "Silk Road Bar & Grill",
@@ -36,7 +36,7 @@
 	"cuisine": ["Pizza", "International", "Pasta"],
 	"website": "facebook.com/SILK-ROAD-Bazaar-1463027130596689/",
 	"address": "Jamyan Gun Street 5-1 | central Ulaanbaatar, Ulaanbaatar, Mongolia",
-	"hours": {"": "12:00-23:00"}
+	"hours": {"Mon-Fri": "12:00"}
 },
 {
 	"name": "Ukrainskaya Kuhnya",

@@ -196,14 +196,10 @@ Copyright (c) 2015 ubs121
             </section>
 
             <section data-route="rest">
+
               <paper-material elevation="1">
                 <h2 class="page-title">{{params.name}}</h2>
-                <div>This is {{params.name}}'s section</div>
-                
-              </paper-material>
 
-
-              <paper-material elevation="1">
                 <img src="{{baseUrl}}data/[[data.photo]]" alt="Image not found" onError="this.src='images/noimage.png';">
 
                 <p>Cuisine: [[restObj.cuisine]]</p>
@@ -211,7 +207,7 @@ Copyright (c) 2015 ubs121
                 <p>Address: [[restObj.address]]</p>
 
                 <br/>
-                <p>Opening hours:[[restObj.hours]]</p>
+                <p>Opening hours: [[timetable(restObj.hours)]]</p>
 
               </paper-material>
 

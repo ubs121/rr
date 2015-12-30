@@ -45,9 +45,13 @@ Copyright (c) 2015 ubs121
     });
 
     page('/rests/:name', function(data) {
+      console.log('Detail info', data.params);
       app.route = 'rest';
       app.params = data.params;
+
+      app.setRestaurant(data.params.name);
     });
+    
 
     page('/review/:name', function(data) {
       app.route = 'review';

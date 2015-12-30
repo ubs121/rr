@@ -7,10 +7,27 @@
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 
 <dom-module id="write-review">
+<style>
+    paper-slider.red {
+      --paper-slider-knob-color: var(--paper-red-500);
+      --paper-slider-active-color: var(--paper-red-500);
+    }
+    paper-slider.green {
+      --paper-slider-knob-color: var(--paper-green-500);
+      --paper-slider-active-color: var(--paper-green-500);
+    }
+    paper-slider.orange {
+      --paper-slider-knob-color: var(--paper-orange-500);
+      --paper-slider-active-color: var(--paper-orange-500);
+      --paper-slider-pin-color: var(--paper-orange-500);
+    }
 
+</style>
 <template>
   Overall rating of this restaurant: 
-  <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.totalRating}}"></paper-slider>
+
+  <paper-slider id="total" pin snaps max="5" max-markers="5" step="1" value="{{data.totalRating}}"
+   required></paper-slider>
 
   <paper-input label="Your name" value="{{data.reviewer}}"></paper-input>
 
@@ -18,14 +35,17 @@
 
 
     <p>Service: 
-    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.serviceRating}}"></paper-slider>
+    <paper-slider pin snaps max="5" max-markers="5" step="1" class="green"
+      value="{{data.serviceRating}}"></paper-slider>
     </p>
     
     <p>Food:
-    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.foodRating}}"></paper-slider>
+    <paper-slider pin snaps max="5" max-markers="5" step="1" class="orange"
+      value="{{data.foodRating}}"></paper-slider>
     </p>
     <p>Value:
-    <paper-slider pin snaps max="5" max-markers="5" step="1" value="{{data.valueRating}}"></paper-slider>
+    <paper-slider pin snaps max="5" max-markers="5" step="1" class="red"
+      value="{{data.valueRating}}"></paper-slider>
     </p>
 
   How expensive is this restaurant?
@@ -46,6 +66,11 @@
       		type: Object,
       		value: function() { return {}; }
       	}
+      },
+
+      validate: function(e) {
+        // TODO: implement validation
+        return true;
       }
 
   	});

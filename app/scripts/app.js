@@ -87,9 +87,19 @@ Copyright (c) 2015 ubs121
   app.loadData = function(e) {
     fetch('data/restaurant.json')
       .then(function(response) { 
-        response.json().then(function(json) {
-          console.log(json);
-          app.data = json;
+        response.json().then(function(jsonArr) {
+          console.log(jsonArr);
+          // TODO: needs pagination for large data
+          
+          for (var i = 0; i < jsonArr.length; i++) {
+            // TODO: tokenize & create tags
+
+          }
+
+          app.data = jsonArr;
+
+          // TODO: save to storage
+
         });
       })
       .catch(function(err) {
@@ -157,7 +167,17 @@ Copyright (c) 2015 ubs121
     return "http://" + url;
   };
 
+  app.timetable = function(hours) {
+    if (!hours) {
+      return "";
+    }
 
+    // convert map into human readable format
+    return Object.keys(hours).map(function(d){return d + ' ' + hours[d];}).join(',');
+  };
+
+
+  // load data
   app.loadData();
 
 })(document);
