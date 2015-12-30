@@ -13,7 +13,6 @@ Copyright (c) 2015 ubs121
   // filter menu
   app.filterCuisine = ['asian', 'mongolian', 'japanese', 'korean', 'chinese', 'pizza', 'vegan', 'fast food'];
   app.filterLocation = ['east', 'west', 'center', 'south', 'north'];
-  app.filterHours = ['early'];
 
   // Sets app default base URL
   app.baseUrl = '/';
@@ -81,8 +80,10 @@ Copyright (c) 2015 ubs121
 
 
   app.data = {};
+  app.rs = {}; // on screen data
   app.restObj = {};
   app.reviewObj = {};
+  app.sortBy = 0;
 
   app.loadData = function(e) {
     fetch('data/restaurant.json')
@@ -96,6 +97,7 @@ Copyright (c) 2015 ubs121
 
           }
 
+          app.rs = jsonArr;
           app.data = jsonArr;
 
           // TODO: save to storage
@@ -109,11 +111,20 @@ Copyright (c) 2015 ubs121
 
   app.sort = function(e) {
     // TODO: sort by
+    console.log(app.sortBy);
   };
 
   app.filter = function(e) {
     // TODO: filter by
-    console.log('filter!');
+    var msg = e.target.dataMsg || e.target.dataset['msg'];
+    var field = e.target.dataField || e.target.dataset['field'];
+    
+
+    if (field == "cuisine") {
+      console.log(msg);
+    }
+
+    app.closeDrawer();
   };
 
   app.setRestaurant = function(name) {

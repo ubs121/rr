@@ -77,10 +77,10 @@ Copyright (c) 2015 ubs121
             <paper-menu class="menu-content sublist" >
 
               <template is="dom-repeat" items="[[filterCuisine]]">
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="home"></iron-icon>
-                  <span>{{item}}</span>
-                </a>
+                <paper-item class="filter" on-tap="filter" 
+                  data-msg="[[item]]" data-field="cuisine">
+                  <span>[[item]]</span>
+                </paper-item>
               </template>
 
             </paper-menu>
@@ -90,30 +90,14 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By location</paper-item>
             <paper-menu class="menu-content sublist">
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="home"></iron-icon>
-                  <span>East</span>
-                </a>
+              
+              <template is="dom-repeat" items="[[filterLocation]]">
+                <paper-item class="filter" on-tap="filter" 
+                  data-msg="[[item]]" data-field="location">
+                  <span>[[item]]</span>
+                </paper-item>
+              </template>
 
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>West</span>
-                </a>
-
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>Center</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>South</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>North</span>
-                </a>
             </paper-menu>
           </paper-submenu>
 
@@ -121,27 +105,16 @@ Copyright (c) 2015 ubs121
 
             <paper-item class="menu-trigger">By opening hours</paper-item>
             <paper-menu class="menu-content sublist">
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Early</span>
-                </a>
-
-                <a data-route="contact" href="{{baseUrl}}contact">
-                  <iron-icon icon="mail"></iron-icon>
-                  <span>Night</span>
-                </a>
-
-                <a data-route="home" href="{{baseUrl}}">
-                  <iron-icon icon="home"></iron-icon>
-                  <span>Weekday</span>
-                </a>
-
-                <a data-route="rests" href="{{baseUrl}}rests">
-                  <iron-icon icon="info"></iron-icon>
-                  <span>Weekend</span>
-                </a>
-
-                
+              
+              <paper-item  class="filter" on-tap="filter" 
+                data-msg="early" data-field="hours">
+                <span>early (before 10:00 AM)</span>
+              </paper-item>
+              
+              <paper-item class="filter" on-tap="filter" 
+                data-msg="weekend" data-field="hours">
+                <span>weekend</span>
+              </paper-item>
             </paper-menu>
           </paper-submenu>
 
@@ -170,7 +143,7 @@ Copyright (c) 2015 ubs121
           <!-- sorting -->
           <div class="bottom bottom-container center horizontal layout">
             <p class="small">Sort by</p>
-            <paper-tabs selected="0">
+            <paper-tabs selected="{{sortBy}}" on-click="sort">
               <paper-tab>Ranking</paper-tab>
               <paper-tab>Name</paper-tab>
               <paper-tab>Price</paper-tab>
@@ -187,7 +160,7 @@ Copyright (c) 2015 ubs121
             <section data-route="rests">
               <p>Restaurant list: asian</p>
 
-              <template is="dom-repeat" items="{{data}}">
+              <template is="dom-repeat" items="{{rs}}">
                 <paper-card>
                   <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a><br>
                   <img src="{{baseUrl}}data/{{item.photo}}" alt="Image not found" onError="this.src='images/noimage.png';">
