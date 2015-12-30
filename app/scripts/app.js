@@ -10,6 +10,7 @@ Copyright (c) 2015 ubs121
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
+  // filter menu
   app.filterCuisine = ['asian', 'mongolian', 'japanese', 'korean', 'chinese', 'pizza', 'vegan', 'fast food'];
   app.filterLocation = ['east', 'west', 'center', 'south', 'north'];
   app.filterHours = ['early'];
@@ -21,6 +22,7 @@ Copyright (c) 2015 ubs121
     // set app.baseURL to '/your-pathname/' if running from folder in production
     // app.baseUrl = '/polymer-starter-kit/';
   }
+
 
   app.displayInstalledToast = function() {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
@@ -78,25 +80,21 @@ Copyright (c) 2015 ubs121
   };
 
 
-
   app.data = {};
-  app.review = {};
+  app.restObj = {};
+  app.reviewObj = {};
 
   app.loadData = function(e) {
-    var dataNames = ['restaurant',  'review'];
-    
-    dataNames.forEach(function(name) {
-      fetch('data/' + name + '.json')
-        .then(function(response) { 
-          response.json().then(function(json) {
-            console.log(json);
-            app.data[name] = json;
-          });
-        })
-        .catch(function(err) {
-
+    fetch('data/restaurant.json')
+      .then(function(response) { 
+        response.json().then(function(json) {
+          console.log(json);
+          app.data = json;
         });
-    });
+      })
+      .catch(function(err) {
+
+      });
   };
 
   app.sort = function(e) {
@@ -108,15 +106,55 @@ Copyright (c) 2015 ubs121
     console.log('filter!');
   };
 
+  app.setRestaurant = function(name) {
+    for (var i = 0; i < app.data.length; i++) {
+      if (app.data[i].name == name) {
+        // set current restaurant
+        app.restObj = app.data[i];
+        return;
+      }
+    }
+
+    // not found
+    app.restObj = {};
+  };
+
   
   app.submitReview = function(e) {
-    var today = new Date();
-    
-    // auto fields    
-    app.review.restaurant = app.params.name;
-    app.review.date = formatDate(today);
 
-    console.log('save!', app.review);
+    // validate form
+    var reviewElem = Polymer.dom(document).querySelector('write-review');
+    if (!reviewElem.validate()) {
+      app.$.toast.text = "Invalid form!";
+      app.$.toast.show();
+      return;
+    }
+    
+    // fill auto fields    
+    var today = new Date();
+    app.reviewObj.restaurant = app.params.name;
+    app.reviewObj.date = formatDate(today);
+
+    // TODO: save to localstorage
+    console.log('saved!', app.reviewObj);
+  };
+
+  app.fullUrl = function(url) {
+    if (!url) {
+      return "";
+    }
+
+    console.log("url", url);
+    
+    if (url.startsWith("http")) {
+      return url;
+    }
+
+    if (!url.startsWith("www")) {
+      url = "www." + url;
+    }
+
+    return "http://" + url;
   };
 
 
