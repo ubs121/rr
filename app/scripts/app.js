@@ -11,7 +11,7 @@ Copyright (c) 2015 ubs121
   var app = document.querySelector('#app');
 
   // filter menu
-  app.filterCuisine = ['asian', 'mongolian', 'japanese', 'korean', 'chinese', 'pizza', 'vegan', 'fast food'];
+  app.filterCuisine = ['asian', 'mongolian', 'indian', 'japanese', 'korean', 'chinese', 'pizza', 'vegan', 'fast food'];
   app.filterLocation = ['east', 'west', 'center', 'south', 'north'];
 
   // Sets app default base URL
@@ -79,29 +79,30 @@ Copyright (c) 2015 ubs121
   };
 
 
-  app.data = {};
-  app.rs = {}; // on screen data
-  app.restObj = {};
-  app.reviewObj = {};
+  app.data = {}; // restaurant data
+  app.rs = []; // on screen copy of restaurants
+  app.restObj = {}; // current restaurant
+  app.reviewObj = {}; // current review
   app.sortBy = 0;
+  app.filterBy = {};
 
   app.loadData = function(e) {
+    // first load from localstorage
+    if (localStorage.restaurant) {
+      app.data = JSON.parse(localStorage.restaurant);
+      app.populate();
+      return;
+    }
+
+    // load from server
     fetch('data/restaurant.json')
       .then(function(response) { 
-        response.json().then(function(jsonArr) {
-          console.log(jsonArr);
-          // TODO: needs pagination for large data
-          
-          for (var i = 0; i < jsonArr.length; i++) {
-            // TODO: tokenize & create tags
+        response.json().then(function(jsonData) {
+          app.data = jsonData;
+          app.populate();
 
-          }
-
-          app.rs = jsonArr;
-          app.data = jsonArr;
-
-          // TODO: save to storage
-
+          // save to storage if it's first time
+          localStorage.setItem("restaurant", JSON.stringify(app.data));
         });
       })
       .catch(function(err) {
@@ -109,38 +110,70 @@ Copyright (c) 2015 ubs121
       });
   };
 
-  app.sort = function(e) {
-    // TODO: sort by
-    console.log(app.sortBy);
+  app.populate = function(e) {
+    app.rs = Object.keys(app.data).map(function(r){return app.data[r];});
   };
 
+
+  // Sorting
+  app.sort = function(e) {
+    if (app.sortBy == 0) {
+      app.rs = app.rs.sort(ByRating).slice();
+    } else if (app.sortBy == 1) {
+      app.rs = app.rs.sort(ByName).slice();
+    } else if (app.sortBy == 2) {
+      app.rs = app.rs.sort(ByPrice).slice();
+    }
+
+    app.focusList();
+  };
+
+  // Filtering
   app.filter = function(e) {
-    // TODO: filter by
     var msg = e.target.dataMsg || e.target.dataset['msg'];
     var field = e.target.dataField || e.target.dataset['field'];
     
+    console.log(msg);
 
-    if (field == "cuisine") {
-      console.log(msg);
-    }
+    app.filterBy[field] = msg;
 
-    app.closeDrawer();
-  };
+    var rs = [];
+    for (var key in app.data) {
+      if (app.data.hasOwnProperty(key)) {
+        var rest = app.data[key];
 
-  app.setRestaurant = function(name) {
-    for (var i = 0; i < app.data.length; i++) {
-      if (app.data[i].name == name) {
-        // set current restaurant
-        app.restObj = app.data[i];
-        return;
+        // TODO: use AND filter (app.filterBy)
+
+        if (field == "cuisine" && arrContains(rest.cuisine, [msg])) {
+          rs.push(rest);
+        }
+        if (field == "location" && arrContains(rest.location, [msg])) {
+          rs.push(rest);
+        }
+        if (field == "hours") {
+          // TODO: filter by opening hours
+        }
       }
     }
 
-    // not found
-    app.restObj = {};
+    app.rs = rs;
+
+
+    app.focusList();
   };
 
-  
+  app.focusList = function(e) {
+    app.closeDrawer();
+    app.route = "rests";
+    app.scrollPageToTop();
+  };
+
+  // Set current restaurant object
+  app.setRestaurant = function(name) {
+    app.restObj = app.data[name];
+  };
+
+  // save review
   app.submitReview = function(e) {
 
     // validate form
@@ -156,26 +189,52 @@ Copyright (c) 2015 ubs121
     app.reviewObj.restaurant = app.params.name;
     app.reviewObj.date = formatDate(today);
 
-    // TODO: save to localstorage
+    // TODO: update total score
+
+    
     console.log('saved!', app.reviewObj);
+
+    // TODO: check duplication, accept only one review for one person
+    var restObj = app.data[app.reviewObj.restaurant];
+    if (!restObj.reviews) {
+      restObj.reviews = [];
+    }
+    restObj.reviews.push(app.reviewObj);
+
+    // FIXME: necceary ?
+    app.data[app.reviewObj.restaurant] = restObj;
+
+    // save to localstorage
+    localStorage.setItem("restaurant", JSON.stringify(app.data));
+  };
+
+  // get last reviews
+  app.lastReviews = function(restName) {
+    var r = app.data[restName];
+    var rr = [];
+    if (r.reviews) {
+      // at most, show 2 reviews
+      for (var i = 0; i < r.reviews.length; i++) {
+        rr.push(r.reviews[i]);
+      }
+      return rr;
+    }
+
+    return [{"reviewer":"ubs121", "review": "Nice!", "date": "2015-12-25"}];
   };
 
   app.fullUrl = function(url) {
-    if (!url) {
-      return "";
-    }
+    return fullUrl(url);
+  };
 
-    console.log("url", url);
-    
-    if (url.startsWith("http")) {
-      return url;
-    }
+  var price2str = {
+    1: 'Cheap eat',
+    2: 'Mid range',
+    3: 'Fine dining'
+  };
 
-    if (!url.startsWith("www")) {
-      url = "www." + url;
-    }
-
-    return "http://" + url;
+  app.priceStr = function(p) {
+    return price2str[p];
   };
 
   app.timetable = function(hours) {
