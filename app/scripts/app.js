@@ -84,7 +84,8 @@ Copyright (c) 2015 ubs121
   app.restObj = {}; // current restaurant
   app.reviewObj = {}; // current review
   app.sortBy = 0;
-  app.filterBy = {};
+  app.filterBy = [];
+  app.filterMap = [];
 
   app.loadData = function(e) {
     // first load from localstorage
@@ -135,7 +136,7 @@ Copyright (c) 2015 ubs121
     
     console.log(msg);
 
-    app.filterBy[field] = msg;
+    app.filterMap[field] = msg;
 
     var rs = [];
     for (var key in app.data) {
@@ -144,11 +145,13 @@ Copyright (c) 2015 ubs121
 
         // TODO: use AND filter (app.filterBy)
 
-        if (field == "cuisine" && arrContains(rest.cuisine, [msg])) {
+        if (field == "cuisine" && arrContains(rest.cuisine, app.filterMap[field])) {
           rs.push(rest);
+          continue;
         }
-        if (field == "location" && arrContains(rest.location, [msg])) {
+        if (field == "location" && arrContains(rest.location, app.filterMap[field])) {
           rs.push(rest);
+          continue;
         }
         if (field == "hours") {
           // TODO: filter by opening hours
@@ -156,9 +159,16 @@ Copyright (c) 2015 ubs121
       }
     }
 
+    app.filterBy = Object.keys(app.filterMap).map(function(f) { return app.filterMap[f]; });
     app.rs = rs;
+    app.focusList();
+  };
 
-
+  app.clearFilter = function(e) {
+    // TODO: clear only data-msg filter
+    app.filterBy = [];
+    app.filterMap = {};
+    app.populate();
     app.focusList();
   };
 
@@ -189,12 +199,7 @@ Copyright (c) 2015 ubs121
     app.reviewObj.restaurant = app.params.name;
     app.reviewObj.date = formatDate(today);
 
-    // TODO: update total score
-
-    
-    console.log('saved!', app.reviewObj);
-
-    // TODO: check duplication, accept only one review for one person
+    // TODO: check duplication, accept only one review per person
     var restObj = app.data[app.reviewObj.restaurant];
     if (!restObj.reviews) {
       restObj.reviews = [];
@@ -206,6 +211,7 @@ Copyright (c) 2015 ubs121
 
     // save to localstorage
     localStorage.setItem("restaurant", JSON.stringify(app.data));
+    console.log('saved!', app.reviewObj);
   };
 
   // get last reviews
@@ -213,7 +219,6 @@ Copyright (c) 2015 ubs121
     var r = app.data[restName];
     var rr = [];
     if (r.reviews) {
-      // at most, show 2 reviews
       for (var i = 0; i < r.reviews.length; i++) {
         rr.push(r.reviews[i]);
       }
@@ -243,7 +248,7 @@ Copyright (c) 2015 ubs121
     }
 
     // convert map into human readable format
-    return Object.keys(hours).map(function(d){return d + ' ' + hours[d];}).join(',');
+    return Object.keys(hours).map(function(d){return d + ' ' + hours[d];}).join(', ');
   };
 
 

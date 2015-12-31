@@ -29,14 +29,9 @@ function ByPrice(a, b) {
 }
 
 function arrContains(a, b) {
-	if (a.constructor === Array && b.constructor === Array) {
+	if (a.constructor === Array) {
 		var a = a.map(Function.prototype.call, String.prototype.toLowerCase);
-
-		for (var i = 0; i < b.length; i++) {
-			if (a.indexOf(b[i]) >= 0) {
-				return true;
-			}
-		}
+		return (a.indexOf(b.toLowerCase()) >= 0);
 	}
 
 	return false;
