@@ -100,7 +100,7 @@ Copyright (c) 2015 ubs121
 
             </paper-menu>
           </paper-submenu>
-
+          <!--
           <paper-submenu label="paper-submenu" opened>
 
             <paper-item class="menu-trigger">By opening hours</paper-item>
@@ -117,7 +117,7 @@ Copyright (c) 2015 ubs121
               </paper-item>
             </paper-menu>
           </paper-submenu>
-
+          -->
         </paper-menu>
 
 
@@ -164,41 +164,57 @@ Copyright (c) 2015 ubs121
                 <template is="dom-repeat" items="{{filterBy}}">
                   <p class="tag">
                     <span>{{item}}</span>
-                    <i class="close" data-msg="{{item}}" on-click="clearFilter">x</i>  
+                    <i class="close" data-msg="{{item}}" on-click="clearFilter" title="close">&#10006;</i>  
                   </p>
                 </template>
               </div>
 
 
               <template is="dom-repeat" items="{{rs}}">
-                <paper-card>
-                  <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a><br>
-                  <p>Rating: {{item.rating}}</p>
-                  
-                  <a href$="{{baseUrl}}rests/{{item.name}}">
-                    <img class="rest-photo" src="{{baseUrl}}data/{{item.photo}}" alt="Image not found" onError="this.src='images/noimage.png';">
-                  </a>
+                <paper-card class="layout horizontal">
+                  <div class="thumb">
+                    <a href$="{{baseUrl}}rests/{{item.name}}">
+                      <img class="rest-photo" src="{{baseUrl}}data/{{item.photo}}" alt="Image not found" onError="this.src='images/noimage.png';">
+                    </a>
+                  </div>
+
+                  <div class="detail">
+                    <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a>
+                    <p><x-ratings value="{{item.rating}}"></x-ratings></p>
+                    <p>Cuisine: [[item.cuisine]]</p>
+                    <p>Website: <a href="[[fullUrl(restObj.website)]]">[[item.website]]</a></p>
+
+                    <p>Price: [[priceStr(item.price)]]</p>
+                  </div>
+
                 </paper-card>
               </template>
             </section>
 
             <section data-route="rest">
               <paper-material elevation="1">
+                
+                <div >
+                  <h2 class="page-title">{{params.name}}</h2>
+                  <p>
+                  <x-ratings value="[[restObj.rating]]"></x-ratings>
+                  </p>
+
+                  <img  class="photo" src="{{baseUrl}}data/[[restObj.photo]]" alt="Image not found" onError="this.src='images/noimage.png';">
+                  </div>
               
-                <h2 class="page-title">{{params.name}}</h2>
-                <p>[[restObj.rating]]</p>
+                <div>
+                  
+                  <p>Cuisine: [[restObj.cuisine]]</p>
+                  <p>Website: <a href="[[fullUrl(restObj.website)]]">[[restObj.website]]</a></p>
 
-                <img class="rest-photo" src="{{baseUrl}}data/[[data.photo]]" alt="Image not found" onError="this.src='images/noimage.png';">
+                  <p>Price: [[priceStr(restObj.price)]]</p>
 
-                <p>Cuisine: [[restObj.cuisine]]</p>
-                <p>Website: <a href="[[fullUrl(restObj.website)]]">[[restObj.website]]</a></p>
+                  <p>Address: [[restObj.address]]</p>
 
-                <p>Price: [[priceStr(restObj.price)]]</p>
-
-                <p>Address: [[restObj.address]]</p>
-
-                <br/>
-                <p>Opening hours: [[timetable(restObj.hours)]]</p>
+                  <br/>
+                  <p>Opening hours: [[timetable(restObj.hours)]]</p>
+                </div>
 
               </paper-material>
 
@@ -207,10 +223,17 @@ Copyright (c) 2015 ubs121
               
                 <p>Reviews...</p>
                 
-                <template is="dom-repeat" items="{{lastReviews(params.name)}}">
-                  <p>[[item.reviewer]]</p>
-                  <p>[[item.date]]</p>
-                  <p>[[item.review]]</p>
+                <template is="dom-repeat" items="{{restObj.reviews}}">
+                  <div class="review layout vertical" style="margin-bottom: 20px;">
+                    
+                    <div class="review-title layout horizontal">
+                      <div class="flex">[[item.reviewer]]</div>
+                      <div>[[item.date]]</div>
+                    </div>
+                  
+                    <div class="review-body" style="margin-top: 10px;">[[item.review]]</div>
+                  </div>
+
                 </template>
               
               </paper-material>

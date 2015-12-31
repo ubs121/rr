@@ -28,15 +28,25 @@ function ByPrice(a, b) {
 	return 0;
 }
 
-function arrContains(a, b) {
-	if (a.constructor === Array) {
-		var a = a.map(Function.prototype.call, String.prototype.toLowerCase);
-		return (a.indexOf(b.toLowerCase()) >= 0);
-	}
+function matchFilter(obj, filterMap) {
+	for (var k in filterMap) {
+		var o = obj[k];
 
-	return false;
+		if (!o) {
+			return false;
+		}
+
+		if (o.constructor === Array) {
+			var vals = o.map(Function.prototype.call, String.prototype.toLowerCase);
+			if (vals.indexOf(filterMap[k]) < 0) {
+				return false;
+			}
+		} else if (o != filterMap[k]) {
+			return false;
+		}
+    }
+    return true;
 }
-
 
 String.prototype.rjust = function(width, padding) {
   padding = (padding || " ").substr(0, 1); // one and only one char
@@ -51,8 +61,6 @@ function fullUrl(url) {
 	if (!url) {
 	  return "";
 	}
-
-	console.log("url", url);
 
 	if (url.startsWith("http")) {
 	  return url;

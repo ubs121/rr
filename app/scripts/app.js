@@ -85,11 +85,12 @@ Copyright (c) 2015 ubs121
   app.reviewObj = {}; // current review
   app.sortBy = 0;
   app.filterBy = [];
-  app.filterMap = [];
+  app.filterMap = {};
 
   app.loadData = function(e) {
+    var DEBUG = false;
     // first load from localstorage
-    if (localStorage.restaurant) {
+    if (!DEBUG && localStorage.restaurant) {
       app.data = JSON.parse(localStorage.restaurant);
       app.populate();
       return;
@@ -143,18 +144,13 @@ Copyright (c) 2015 ubs121
       if (app.data.hasOwnProperty(key)) {
         var rest = app.data[key];
 
-        // TODO: use AND filter (app.filterBy)
-
-        if (field == "cuisine" && arrContains(rest.cuisine, app.filterMap[field])) {
-          rs.push(rest);
-          continue;
-        }
-        if (field == "location" && arrContains(rest.location, app.filterMap[field])) {
-          rs.push(rest);
-          continue;
-        }
         if (field == "hours") {
           // TODO: filter by opening hours
+          continue;
+        }
+
+        if (matchFilter(rest, app.filterMap)) {
+          rs.push(rest);
         }
       }
     }
@@ -165,7 +161,7 @@ Copyright (c) 2015 ubs121
   };
 
   app.clearFilter = function(e) {
-    // TODO: clear only data-msg filter
+    // TODO: clear only one filter
     app.filterBy = [];
     app.filterMap = {};
     app.populate();
@@ -206,26 +202,19 @@ Copyright (c) 2015 ubs121
     }
     restObj.reviews.push(app.reviewObj);
 
+    // TODO: accumulate total score
+
     // FIXME: necceary ?
     app.data[app.reviewObj.restaurant] = restObj;
 
     // save to localstorage
     localStorage.setItem("restaurant", JSON.stringify(app.data));
     console.log('saved!', app.reviewObj);
-  };
 
-  // get last reviews
-  app.lastReviews = function(restName) {
-    var r = app.data[restName];
-    var rr = [];
-    if (r.reviews) {
-      for (var i = 0; i < r.reviews.length; i++) {
-        rr.push(r.reviews[i]);
-      }
-      return rr;
-    }
-
-    return [{"reviewer":"ubs121", "review": "Nice!", "date": "2015-12-25"}];
+    app.$.toast.text = "Successfully saved!";
+    app.$.toast.show();
+    // app.route = "rest";
+    // app.params.name = restObj.name;
   };
 
   app.fullUrl = function(url) {

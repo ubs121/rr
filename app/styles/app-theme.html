@@ -96,6 +96,7 @@ Copyright (c) 2015 ubs121
   paper-card {
     display: block;
     margin: 10px;
+    padding: 15px;
   }
 
   #mainToolbar .middle-container  {
@@ -131,9 +132,46 @@ Copyright (c) 2015 ubs121
     display: inline-block;
   }
 
-  img.rest-photo {
-    max-width: 150px;
+  .thumb {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    width: calc(40% - 10px);
   }
+
+  .thumb img {
+    height: 90px;
+    width: 90px;
+    margin: 11px;
+    border: solid 3px #ccc;
+    background-color: #589442;
+    cursor: pointer;
+  }
+
+  .detail {
+    padding-left: 110px;
+    display: table;
+    height: 56px;
+    overflow: hidden;
+  }
+
+  .photo {
+    width: calc(40% - 10px);
+  }
+
+  .close {
+    cursor: pointer;
+  }
+
+
+ .review-title {
+  font-size: small;
+ }
+
+.review-body {
+  font-weight: bold;
+ }
 
   #toast .toast-hide-button {
     color: #eeff41;
