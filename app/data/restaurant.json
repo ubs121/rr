@@ -41,7 +41,7 @@
 		"hours": {},
 		"location": ["center"],
 		"price": 2,
-		"rating": 4
+		"rating": 2
 	},
 	"Khara Khorum": {
 		"name": "Khara Khorum",
@@ -52,7 +52,7 @@
 		"hours": {"Mon-Fri": "11:00-23:00"},
 		"location": ["east"],
 		"price": 2,
-		"rating": 4
+		"rating": 3
 	},
 	"Silk Road Bar & Grill": {
 		"name": "Silk Road Bar & Grill",
