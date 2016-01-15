@@ -71,7 +71,7 @@ Copyright (c) 2015 ubs121
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]" multi>
           
 
-          <paper-submenu label="paper-submenu" opened>
+          <paper-submenu label="paper-submenu" opened focused>
 
             <paper-item class="menu-trigger">By cuisine</paper-item>
             <paper-menu class="menu-content sublist" >
@@ -155,12 +155,11 @@ Copyright (c) 2015 ubs121
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
-            
-
-
 
             <section data-route="rests">
-              <div>
+              
+              <!-- filter status -->
+              <div role="status">
                 <template is="dom-repeat" items="{{filterBy}}">
                   <p class="tag">
                     <span>{{item}}</span>
@@ -170,15 +169,17 @@ Copyright (c) 2015 ubs121
               </div>
 
 
+              <!-- list of restaurants -->
+              <ul class="restaurants">
               <template is="dom-repeat" items="{{rs}}">
-                <paper-card class="layout horizontal">
+                <li class="rest layout horizontal">
                   <div class="thumb">
                     <a href$="{{baseUrl}}rests/{{item.name}}">
-                      <img class="rest-photo" src="{{baseUrl}}data/{{item.photo}}" alt="Image not found" onError="this.src='images/noimage.png';">
+                      <img class="rest-photo" src="{{baseUrl}}data/{{item.photo}}" alt="Logo of {{item.name}} restaurant" onError="this.src='images/noimage.png';">
                     </a>
                   </div>
 
-                  <div class="detail">
+                  <div class="flex detail">
                     <a href$="{{baseUrl}}rests/{{item.name}}">{{item.name}}</a>
                     <p><x-ratings value="{{item.rating}}"></x-ratings></p>
                     <p>Cuisine: [[item.cuisine]]</p>
@@ -186,24 +187,22 @@ Copyright (c) 2015 ubs121
 
                     <p>Price: [[priceStr(item.price)]]</p>
                   </div>
-
-                </paper-card>
+                </li>
               </template>
+              </ul>
+
             </section>
 
             <section data-route="rest">
               <paper-material elevation="1">
                 
-                <div >
+                <div role="heading">
                   <h2 class="page-title">{{params.name}}</h2>
-                  <p>
-                  <x-ratings value="[[restObj.rating]]"></x-ratings>
-                  </p>
-
-                  <img  class="photo" src="{{baseUrl}}data/[[restObj.photo]]" alt="Image not found" onError="this.src='images/noimage.png';">
-                  </div>
+                  <p><x-ratings value="[[restObj.rating]]"></x-ratings></p>
+                  <img  class="photo" src="{{baseUrl}}data/[[restObj.photo]]" alt="Logo of {{item.name}} restaurant" onError="this.src='images/noimage.png';">
+                </div>
               
-                <div>
+                <div class="detail">
                   
                   <p>Cuisine: [[restObj.cuisine]]</p>
                   <p>Website: <a href="[[fullUrl(restObj.website)]]">[[restObj.website]]</a></p>
@@ -219,12 +218,13 @@ Copyright (c) 2015 ubs121
               </paper-material>
 
               <paper-material elevation="1">
-                <a href$="{{baseUrl}}review/[[params.name]]">write review</a>
+                <a href$="{{baseUrl}}review/[[params.name]]" role="button">write review</a>
               
-                <p>Reviews...</p>
+                <p role="heading">Reviews...</p>
                 
+                <ul>
                 <template is="dom-repeat" items="{{restObj.reviews}}">
-                  <div class="review layout vertical" style="margin-bottom: 20px;">
+                  <li class="review layout vertical" style="margin-bottom: 20px;">
                     
                     <div class="review-title layout horizontal">
                       <div class="flex">[[item.reviewer]]</div>
@@ -232,9 +232,10 @@ Copyright (c) 2015 ubs121
                     </div>
                   
                     <div class="review-body" style="margin-top: 10px;">[[item.review]]</div>
-                  </div>
+                  </li>
 
                 </template>
+                </ul>
               
               </paper-material>
 
